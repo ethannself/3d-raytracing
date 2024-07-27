@@ -1,12 +1,17 @@
-typedef float Point[3];
-#include <iostream>
-using namespace std;
 
+#include <cstdio>
+typedef float Point[3];
 int main() {
-  Point corners[8] = {
-      {0, 0, 0},  {12, 0, 0},  {12, 8, 0},  {0, 8, 0},
-      {0, 0, 10}, {12, 0, 10}, {12, 8, 10}, {0, 8, 10},
-  };
-  cout << (int)corners[1][0] << '\n';
+  Point corners[8] = {{1, -1, -5},  {1, -1, -3},  {1, 1, -5},  {1, 1, -3},
+                      {-1, -1, -5}, {-1, -1, -3}, {-1, 1, -5}, {-1, 1, -3}};
+
+  for (int i = 0; i < 8; ++i) {
+    // Divide the x and y coordinates by the z coordinate to
+    // project the point onto the canvas
+    float x_proj = corners[i][0] / -corners[i][2];
+    float y_proj = corners[i][1] / -corners[i][2];
+    printf("Projected corner %d: x:%f, y:%f\n", i, x_proj, y_proj);
+  }
+
   return 0;
 }
